@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>请登录</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/signin.css">
+
+    <script src="vue/vue.js"></script>
+    <script src="vue/axios.js"></script>
+
+</head>
+
+<body>
+<div id="app" class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">请登录</h2>
+        <p>
+        <div class="alert alert-danger" role="alert" v-if="tipMessage">{{tipMessage}}</div>
+        <label for="username" class="sr-only">用户名</label>
+        <input type="text" v-model="form.username" id="username" name="username" class="form-control" placeholder="用户名"
+               required autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">密码</label>
+            <input type="password" v-model="form.password" id="password" name="password" class="form-control"
+                   placeholder="密码" required>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="button" @click="login()">登 陆</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" @click="oauthLogin()">使用PMO系统登录</button>
+    </form>
+</div>
+</body>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            form: {
+                username: 'water',
+                password: '123456'
+            },
+            tipMessage: ''
+        },
+        methods: {
+            login: function () {
+                //表单方式提交数据
+                let params = new URLSearchParams();
+                params.append('username', this.form.username);
+                params.append('password', this.form.password);
+                axios.post("/login", params).then(res => {
+                    document.write(res.data);
+                }).catch(error => {
+                    console.log(error);
+                });
+            },
+            oauthLogin: function () {
+                let url = 'http://localhost:8013/client/login?response_type=code&client_id=wood_app&scope=user';
+                axios.get("/getState").then(res=> {
+                  const state = '&'+res.data || '';
+                  url += state;
+                });
+                window.open(url,'_self');
+            }
+        }
+    });
+</script>
+</html>
