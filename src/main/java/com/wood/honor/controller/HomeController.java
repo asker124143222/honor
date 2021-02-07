@@ -11,10 +11,7 @@ import org.springframework.util.Base64Utils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -73,6 +70,11 @@ public class HomeController {
         return UUID.randomUUID().toString().replace("-","");
     }
 
+    @ResponseBody
+    @PostMapping("/getState")
+    public String postState(@RequestBody AuthToken authToken) {
+        return authToken.toString();
+    }
 
     @ResponseBody
     @GetMapping("/callback")

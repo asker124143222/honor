@@ -1,4 +1,4 @@
-package com.wood.honor.config.App;
+package com.wood.honor.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * @Description: TODO
  **/
 @Configuration
-public class config {
+public class AppConfig {
 
     @Bean
     public RestTemplate restTemplate(){

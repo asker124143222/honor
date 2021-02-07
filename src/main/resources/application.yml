@@ -6,3 +6,8 @@ spring:
     password: 1234
     host: 127.0.0.1
     timeout: 10000ms
+  security:
+    user:
+      name: user
+      password: 123456
+      roles: user
