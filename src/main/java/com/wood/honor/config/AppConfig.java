@@ -18,4 +18,9 @@ public class AppConfig {
         return new RestTemplate();
     }
 
+    @Bean
+    public CustomAuthMessageConverter customAuthMessageConverter() {
+        return new CustomAuthMessageConverter();
+    }
+
 }
