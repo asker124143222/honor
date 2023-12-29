@@ -3,6 +3,7 @@ package com.wood.honor.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wood.honor.model.AuthToken;
+import com.wood.honor.model.LoginInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
@@ -76,6 +77,44 @@ public class HomeController {
     @GetMapping("/index")
     public String indexPage() {
         return "index";
+    }
+
+    @ResponseBody
+    @GetMapping("/auth")
+    public AuthToken getAuth() {
+        AuthToken authToken = new AuthToken();
+        authToken.setAccess_token(UUID.randomUUID().toString().replace("-",""));
+        authToken.setExpires_in(1919191);
+        authToken.setJti(String.valueOf(UUID.randomUUID().getLeastSignificantBits()));
+        authToken.setScope("全部");
+        return authToken;
+    }
+
+    @ResponseBody
+    @PostMapping("/auth")
+    public void sendAuth(@RequestBody AuthToken authToken) {
+        System.out.println(authToken);
+    }
+
+    @ResponseBody
+    @PutMapping("/auth")
+    public AuthToken postAuth(@RequestBody AuthToken authToken) {
+        System.out.println(authToken);
+        return authToken;
+    }
+
+    @ResponseBody
+    @PostMapping("/login2")
+    public LoginInfo login2(LoginInfo loginInfo){
+        System.out.println(loginInfo);
+        return loginInfo;
+    }
+
+    @ResponseBody
+    @PostMapping("/login3")
+    public LoginInfo login3(@RequestBody LoginInfo loginInfo){
+        System.out.println(loginInfo);
+        return loginInfo;
     }
 
     @ResponseBody
